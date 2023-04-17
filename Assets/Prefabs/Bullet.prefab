@@ -46,9 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f569079cf1dae44b0e4c00a1f71561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flySpeed: 20
+  flySpeed: 10
   maxFlyDistance: 10
-  damage: 0
 --- !u!61 &7306546121079447738
 BoxCollider2D:
   m_ObjectHideFlags: 0
