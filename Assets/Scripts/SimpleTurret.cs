@@ -2,11 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class SimpleTurret : MonoBehaviour
+public class SimpleTurret : AbstractTurret
 {
     [SerializeField] private float damage;
     [SerializeField] private float delayBetweenAttacks;
