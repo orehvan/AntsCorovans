@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e88e27f975da049ba3280276b7ec64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseDelta: 0
   moveSpeed: 15
   zoomSpeed: 25
   minZoomDistance: 10
