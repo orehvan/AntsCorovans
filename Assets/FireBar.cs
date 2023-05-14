@@ -13,6 +13,6 @@ public class FireBar : MonoBehaviour
 
     private void FireChanged(int obj)
     {
-        _text.SetText(obj.ToString());
+        _text.SetText("F" + obj.ToString());
     }
 }

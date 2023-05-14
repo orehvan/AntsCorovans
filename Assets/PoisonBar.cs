@@ -13,6 +13,6 @@ public class PoisonBar : MonoBehaviour
 
     private void PoisonChanged(int obj)
     {
-        _text.SetText(obj.ToString());
+        _text.SetText("P" + obj.ToString());
     }
 }

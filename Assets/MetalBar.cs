@@ -13,6 +13,6 @@ public class MetalBar : MonoBehaviour
 
     private void MetalChanged(int obj)
     {
-        _text.SetText(obj.ToString());
+        _text.SetText("M" + obj.ToString());
     }
 }

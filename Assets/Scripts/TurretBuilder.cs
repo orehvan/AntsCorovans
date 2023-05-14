@@ -9,11 +9,12 @@ using UnityEngine.UIElements;
 
 public class TurretBuilder : MonoBehaviour
 {
-    public static TurretBuilder instance;
+    public static TurretBuilder Instance;
     
     [SerializeField] private GameObject buildingUI;
     [SerializeField] private LineRenderer colliderRenderer;
     [SerializeField] private LayerMask turretsLayer;
+    [SerializeField] private GameObject turretInfoPanel;
     private Vector2 buildingPos;
     private bool isBuildingState;
     private Camera mainCamera;
@@ -24,7 +25,10 @@ public class TurretBuilder : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
-        instance = this;
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
     }
 
     void Update()
@@ -55,6 +59,7 @@ public class TurretBuilder : MonoBehaviour
 
     public void CloseBuildingUI()
     {
+        HideTurretInfoPanel();
         isBuildingState = false;
         buildingUI.gameObject.SetActive(false);
         colliderRenderer.enabled = false;
@@ -64,7 +69,7 @@ public class TurretBuilder : MonoBehaviour
     {
         if (!possibleToBuild)
             return;
-        Instantiate(simpleTurret, buildingPos, new Quaternion());
+        Instantiate(chosenTurret, buildingPos, new Quaternion());
         CloseBuildingUI();
     }
 
@@ -103,5 +108,15 @@ public class TurretBuilder : MonoBehaviour
     public void HideTurretCollider()
     {
         colliderRenderer.enabled = false;
+    }
+
+    public void ShowTurretInfoPanel(AbstractTurret chosenTurret)
+    {
+        turretInfoPanel.SetActive(true);
+    }
+
+    public void HideTurretInfoPanel()
+    {
+        turretInfoPanel.SetActive(false);
     }
 }

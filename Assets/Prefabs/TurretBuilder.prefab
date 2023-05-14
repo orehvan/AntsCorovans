@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: F0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -149,6 +149,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 2927811122811966594}
+--- !u!1 &1852148867616630230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5196062087155939188}
+  - component: {fileID: 1116328239392057970}
+  - component: {fileID: 3021932024939031351}
+  m_Layer: 0
+  m_Name: TurretInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &5196062087155939188
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852148867616630230}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7678954981523256820}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -145.74683, y: 24.999985}
+  m_SizeDelta: {x: -28.5064, y: -50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1116328239392057970
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852148867616630230}
+  m_CullTransparentMesh: 1
+--- !u!114 &3021932024939031351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852148867616630230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &5817998731110291677
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +292,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: P0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -365,7 +441,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: M0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -871,6 +947,7 @@ MonoBehaviour:
   turretsLayer:
     serializedVersion: 2
     m_Bits: 64
+  turretInfoPanel: {fileID: 1852148867616630230}
   simpleTurret: {fileID: 1498504057135739938, guid: 9e69bd7fe83e3584cb49650b870be702, type: 3}
 --- !u!120 &6529658006658906202
 LineRenderer:
@@ -985,7 +1062,6 @@ GameObject:
   - component: {fileID: 7678954981074621194}
   - component: {fileID: 7678954981074621195}
   - component: {fileID: 7678954981074621192}
-  - component: {fileID: 4394920770940132955}
   - component: {fileID: 4394920770940132958}
   m_Layer: 0
   m_Name: BuildSimpleTurretButton
@@ -1109,19 +1185,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4394920770940132955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7678954981074621190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d89b05a3355409429915e81165a74ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turretType: {fileID: 1498504057135739942, guid: 9e69bd7fe83e3584cb49650b870be702, type: 3}
 --- !u!114 &4394920770940132958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1151,6 +1214,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 7678954981005793585}
+          m_TargetAssemblyTypeName: TurretBuilder, Assembly-CSharp
+          m_MethodName: ShowTurretInfoPanel
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1498504057135739942, guid: 9e69bd7fe83e3584cb49650b870be702, type: 3}
+            m_ObjectArgumentAssemblyTypeName: DefaultNamespace.AbstractTurret, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -1158,6 +1233,18 @@ MonoBehaviour:
         - m_Target: {fileID: 7678954981005793585}
           m_TargetAssemblyTypeName: TurretBuilder, Assembly-CSharp
           m_MethodName: HideTurretCollider
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7678954981005793585}
+          m_TargetAssemblyTypeName: TurretBuilder, Assembly-CSharp
+          m_MethodName: HideTurretInfoPanel
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1334,6 +1421,7 @@ RectTransform:
   m_Children:
   - {fileID: 7678954981074621193}
   - {fileID: 7678954980521640314}
+  - {fileID: 5196062087155939188}
   m_Father: {fileID: 7678954979893277882}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
