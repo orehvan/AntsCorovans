@@ -11,6 +11,7 @@ public class SimpleTurret : AbstractTurret
     [SerializeField] private float delayBetweenAttacks;
     [SerializeField] private float range;
     
+    
     [SerializeField] private Transform bulletSpawnPos;
     [SerializeField] private GameObject bullet;
 

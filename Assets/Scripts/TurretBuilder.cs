@@ -14,7 +14,7 @@ public class TurretBuilder : MonoBehaviour
     [SerializeField] private GameObject buildingUI;
     [SerializeField] private LineRenderer colliderRenderer;
     [SerializeField] private LayerMask turretsLayer;
-    [SerializeField] private GameObject turretInfoPanel;
+    [SerializeField] private TurretInfo turretInfoPanel;
     private Vector2 buildingPos;
     private bool isBuildingState;
     private Camera mainCamera;
@@ -67,10 +67,23 @@ public class TurretBuilder : MonoBehaviour
 
     public void TryBuildTurret(AbstractTurret chosenTurret)
     {
-        if (!possibleToBuild)
+        if (!possibleToBuild || !CheckPrice(chosenTurret))
             return;
+        TakePayment(chosenTurret);
         Instantiate(chosenTurret, buildingPos, new Quaternion());
         CloseBuildingUI();
+    }
+
+    private bool CheckPrice(AbstractTurret chosenTurret)
+    {
+        var price = chosenTurret.GetPrice();
+        return PseudoPlayer.Instance.playerResources.HasEnoughResources(price);
+    }
+
+    private void TakePayment(AbstractTurret chosenTurret)
+    {
+        var price = chosenTurret.GetPrice();
+        PseudoPlayer.Instance.playerResources.Pay(price);
     }
 
     private void CheckForSpaceToBuild(AbstractTurret chosenTurret)
@@ -112,11 +125,13 @@ public class TurretBuilder : MonoBehaviour
 
     public void ShowTurretInfoPanel(AbstractTurret chosenTurret)
     {
-        turretInfoPanel.SetActive(true);
+        turretInfoPanel.gameObject.SetActive(true);
+        var price = chosenTurret.GetPrice();
+        turretInfoPanel.ShowTurretInfo(price.firePrice, price.poisonPrice, price.metalPrice, chosenTurret.turretImage);
     }
 
     public void HideTurretInfoPanel()
     {
-        turretInfoPanel.SetActive(false);
+        turretInfoPanel.gameObject.SetActive(false);
     }
 }

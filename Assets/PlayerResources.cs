@@ -44,4 +44,17 @@ public class PlayerResources : MonoBehaviour
     public event Action<int> FireChanged;
 
     public event Action<int> MetalChanged;
+
+    public bool HasEnoughResources((int firePrice, int poisonPrice, int metalPrice) price)
+    {
+        return FireResource >= price.firePrice && PoisonResource >= price.poisonPrice &&
+                MetalResource >= price.metalPrice;
+    }
+
+    public void Pay((int firePrice, int poisonPrice, int metalPrice) price)
+    {
+        FireResource -= price.firePrice;
+        PoisonResource -= price.poisonPrice;
+        MetalResource -= price.metalPrice;
+    }
 }
