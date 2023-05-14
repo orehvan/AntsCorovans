@@ -1,29 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using DefaultNamespace;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : AbstractEnemy
 {
-    [SerializeField] private float speed = 5;
-    private Vector2 directionForward = Vector2.right * 7;
-    private Vector2 directionBackward = Vector2.left * 7;
-    private Vector2 currentDirection;
-    private float distance;
+    [SerializeField] private float speed;
+    [SerializeField] private float health;
+    [SerializeField] private GameObject path;
+    [SerializeField] private List<Vector3> waypoints;
+    private int currentWaypointNum;
+    private Vector2 currentWaypoint;
     void Start()
     {
-        currentDirection = directionForward;
+        ParsePath();
+        currentWaypoint = waypoints[currentWaypointNum];
+        currentWaypointNum++;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        if (Vector2.Distance(transform.position, currentDirection) < 0.01f)
-            currentDirection = currentDirection == directionForward ? directionBackward : directionForward;
-        transform.position = Vector2.MoveTowards(transform.position, currentDirection, speed * Time.deltaTime);
+        if (Vector2.Distance(transform.position, currentWaypoint) < 0.01f)
+        {
+            if (waypoints.Count  == currentWaypointNum)
+            {
+                // Debug.Log("Attack base or something");
+                return;
+            }
+            currentWaypoint = waypoints[currentWaypointNum];
+            currentWaypointNum++;
+        }
+
+        transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
     }
 
-    public void GetDamage(float damage)
+    private void ParsePath()
     {
-        Debug.Log($"Got {damage} damage");
+        waypoints = new List<Vector3>();
+        foreach (Transform waypoint in path.transform)
+            waypoints.Add(waypoint.position);
+    }
+
+    public override void GetDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+            Die();
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }

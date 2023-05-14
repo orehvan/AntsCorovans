@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class SimpleBullet : MonoBehaviour
@@ -14,7 +15,7 @@ public class SimpleBullet : MonoBehaviour
     void Start()
     {
         startPos = transform.position;
-        direction = transform.up * 10;
+        direction = startPos + transform.up * maxFlyDistance;
     }
     
     void Update()
@@ -25,13 +26,13 @@ public class SimpleBullet : MonoBehaviour
     private void BulletFly()
     {
         transform.position = Vector2.MoveTowards(transform.position, direction, flySpeed * Time.deltaTime);
-        if ((transform.position - startPos).magnitude > maxFlyDistance)
+        if (maxFlyDistance - (transform.position - startPos).magnitude <= 0.01f)
             Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var enemy = other.gameObject.GetComponent<Enemy>();
+        var enemy = other.gameObject.GetComponent<AbstractEnemy>();
         if (enemy == null) return;
         enemy.GetDamage(damage);
         Destroy(gameObject);

@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class SimpleTurret : MonoBehaviour
+public class SimpleTurret : AbstractTurret
 {
     [SerializeField] private float damage;
     [SerializeField] private float delayBetweenAttacks;
@@ -16,12 +16,12 @@ public class SimpleTurret : MonoBehaviour
 
     private float nextAttackTime;
     
-    private Enemy currentTarget;
-    private List<Enemy> enemiesInRange;
+    private AbstractEnemy currentTarget;
+    private List<AbstractEnemy> enemiesInRange;
     
     void Start()
     {
-        enemiesInRange = new List<Enemy>();
+        enemiesInRange = new List<AbstractEnemy>();
         gameObject.GetComponent<CircleCollider2D>().radius = range;
     }
     
@@ -57,18 +57,18 @@ public class SimpleTurret : MonoBehaviour
             return;
         var newBullet = Instantiate(bullet, bulletSpawnPos.transform.position, transform.rotation);
         newBullet.GetComponent<SimpleBullet>().SetDamage(damage);
-        nextAttackTime = delayBetweenAttacks;
+       nextAttackTime = delayBetweenAttacks;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var enemy = other.gameObject.GetComponent<Enemy>();
+        var enemy = other.gameObject.GetComponent<AbstractEnemy>();
         if(enemy != null)
             enemiesInRange.Add(enemy);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        var enemy = other.gameObject.GetComponent<Enemy>();
+        var enemy = other.gameObject.GetComponent<AbstractEnemy>();
         enemiesInRange.Remove(enemy);
     }
 }
