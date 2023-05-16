@@ -1450,7 +1450,7 @@ MonoBehaviour:
   colliderRenderer: {fileID: 6529658006658906202}
   turretsLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 320
   turretInfoPanel: {fileID: 7780225238706851492}
   simpleTurret: {fileID: 1498504057135739938, guid: 9e69bd7fe83e3584cb49650b870be702, type: 3}
 --- !u!120 &6529658006658906202
