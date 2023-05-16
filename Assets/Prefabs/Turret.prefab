@@ -59,8 +59,8 @@ Transform:
   m_GameObject: {fileID: 1498504057135739938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1498504056986208684}
   - {fileID: 4825677829684329068}
@@ -108,7 +108,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d7f2335fb8f2f7d4eac6727aea3e28e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -138,7 +138,7 @@ MonoBehaviour:
   turretCollider: {fileID: 7389271878131551810}
   damage: 5
   delayBetweenAttacks: 5
-  range: 5
+  range: 10
   bulletSpawnPos: {fileID: 1498504056986208684}
   bullet: {fileID: 7306546121079447749, guid: cac34add40501134f8630e89e56494e6, type: 3}
 --- !u!58 &1498504057135739943

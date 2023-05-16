@@ -31,7 +31,8 @@ public class Enemy : AbstractEnemy
             currentWaypoint = waypoints[currentWaypointNum];
             currentWaypointNum++;
         }
-
+        
+        transform.LookAt(new Vector3(currentWaypoint.x, currentWaypoint.y, 0f));
         transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
     }
 
