@@ -6,6 +6,6 @@ public class FireResource : Resource
 {
     protected override void AddResource()
     {
-        PseudoPlayer.Instance.playerResources.FireResource += value;
+        PlayerController.Instance.playerResources.FireResource += value;
     }
 }

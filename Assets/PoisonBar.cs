@@ -8,7 +8,7 @@ public class PoisonBar : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _text;
     void Start()
     {
-        PseudoPlayer.Instance.playerResources.PoisonChanged += PoisonChanged;
+        PlayerController.Instance.playerResources.PoisonChanged += PoisonChanged;
     }
 
     private void PoisonChanged(int obj)

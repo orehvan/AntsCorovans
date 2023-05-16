@@ -8,7 +8,7 @@ public class MetalBar : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _text;
     void Start()
     {
-        PseudoPlayer.Instance.playerResources.MetalChanged += MetalChanged;
+        PlayerController.Instance.playerResources.MetalChanged += MetalChanged;
     }
 
     private void MetalChanged(int obj)

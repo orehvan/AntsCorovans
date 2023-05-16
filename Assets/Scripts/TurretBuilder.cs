@@ -77,13 +77,13 @@ public class TurretBuilder : MonoBehaviour
     private bool CheckPrice(AbstractTurret chosenTurret)
     {
         var price = chosenTurret.GetPrice();
-        return PseudoPlayer.Instance.playerResources.HasEnoughResources(price);
+        return PlayerController.Instance.playerResources.HasEnoughResources(price);
     }
 
     private void TakePayment(AbstractTurret chosenTurret)
     {
         var price = chosenTurret.GetPrice();
-        PseudoPlayer.Instance.playerResources.Pay(price);
+        PlayerController.Instance.playerResources.Pay(price);
     }
 
     private void CheckForSpaceToBuild(AbstractTurret chosenTurret)

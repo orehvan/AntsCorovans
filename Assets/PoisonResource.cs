@@ -6,6 +6,6 @@ public class PoisonResource : Resource
 {
     protected override void AddResource()
     {
-        PseudoPlayer.Instance.playerResources.PoisonResource += value;
+        PlayerController.Instance.playerResources.PoisonResource += value;
     }
 }

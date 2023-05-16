@@ -6,6 +6,6 @@ public class MetalResource : Resource
 {
     protected override void AddResource()
     {
-        PseudoPlayer.Instance.playerResources.MetalResource += value;
+        PlayerController.Instance.playerResources.MetalResource += value;
     }
 }
