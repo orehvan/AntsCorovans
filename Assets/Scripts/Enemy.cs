@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,11 @@ using UnityEngine;
 
 public class Enemy : AbstractEnemy
 {
+    public BaseBehavior baseObj;
+    public float damagePerTick;
+    public float attackCounter;
+    public float attackDelay;
+    
     [SerializeField] private float speed;
     [SerializeField] private float health;
     [SerializeField] private GameObject path;
@@ -36,6 +42,11 @@ public class Enemy : AbstractEnemy
         transform.position = Vector2.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Base")) DoDamage(damagePerTick);
+    }
+
     private void ParsePath()
     {
         waypoints = new List<Vector3>();
@@ -48,6 +59,15 @@ public class Enemy : AbstractEnemy
         health -= damage;
         if (health <= 0)
             Die();
+    }
+
+    public override void DoDamage(float damage)
+    {
+        attackCounter -= Time.deltaTime;
+        
+        if (!(attackCounter <= 0)) return;
+        attackCounter = attackDelay;
+        baseObj.TakeDamage(damage);
     }
 
     private void Die()
