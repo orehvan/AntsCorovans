@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DTerrain;
+using NavMeshPlus.Components;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -17,9 +18,12 @@ public class PlayerController : MonoBehaviour
     private Shape _destroyCircle;
     private Vector3 _targetPosition;
     private bool _isMoving;
+    private bool navmeshBuilt;
     
     [SerializeField] protected BasicPaintableLayer primaryLayer;
     [SerializeField] protected BasicPaintableLayer secondaryLayer;
+    
+    [SerializeField] private NavMeshSurface navmesh;
 
     private void Awake()
     {
@@ -43,9 +47,16 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             SetTargetPosition();
+            navmeshBuilt = false;
         }
 
-        if (!_isMoving) return;
+        if (!_isMoving)
+        {
+            if (!navmeshBuilt)
+                navmesh.BuildNavMesh();
+            navmeshBuilt = true;
+            return;
+        }
         Move();
         DestroyTerrain();
     }

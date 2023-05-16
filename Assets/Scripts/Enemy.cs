@@ -38,6 +38,12 @@ public class Enemy : AbstractEnemy
     
     void Update()
     {
+        if (isNavmeshPath && navmeshTarget.hasChanged)
+        {
+            agent.SetDestination(navmeshTarget.position);
+            currentWaypoint = navmeshTarget.position;
+        }
+
         if (Vector2.Distance(transform.position, currentWaypoint) < 0.01f)
         {
             if (isNavmeshPath || waypoints.Count  == currentWaypointNum)
@@ -59,11 +65,15 @@ public class Enemy : AbstractEnemy
         {
             Vector3 nextTarget;
             if (agent.path.corners.Length > 1)
-                nextTarget = agent.path.corners[1] - transform.position;
+                nextTarget = agent.path.corners[1];
             else
                 nextTarget = navmeshTarget.position;
-            var angle = Vector3.Angle(nextTarget, Vector2.up);
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, (Vector2)nextTarget - (Vector2)transform.position);
+            // var vectorToTarget = nextTarget - transform.position;
+            // var angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
+            // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            // var angle = Vector3.Angle(nextTarget, Vector2.up);
+            // transform.rotation = Quaternion.Euler(0, 0, angle);
         }
     }
 

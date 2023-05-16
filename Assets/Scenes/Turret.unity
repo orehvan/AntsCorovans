@@ -199,6 +199,7 @@ MonoBehaviour:
   playerResources: {fileID: 138427423}
   primaryLayer: {fileID: 0}
   secondaryLayer: {fileID: 0}
+  navmesh: {fileID: 0}
 --- !u!1 &155055840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,6 +1028,10 @@ PrefabInstance:
     - target: {fileID: 1821170363997017020, guid: ab5fbc5dbb4a28c419c8f81b47167fef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821170363997017022, guid: ab5fbc5dbb4a28c419c8f81b47167fef, type: 3}
+      propertyPath: m_Constraints
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab5fbc5dbb4a28c419c8f81b47167fef, type: 3}

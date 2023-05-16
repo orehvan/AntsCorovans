@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using NavMeshPlus.Components;
 using UnityEngine;
 
 namespace DTerrain
@@ -47,6 +48,8 @@ namespace DTerrain
             Chunks = new List<T>();
             chunkSizeX = OriginalTexture.width / ChunkCountX;
             chunkSizeY = OriginalTexture.height / ChunkCountY;
+            // chunkSizeX = 16;
+            // chunkSizeY = 16;
 
             for (int i = 0; i < ChunkCountX; i++)
             {
@@ -79,7 +82,12 @@ namespace DTerrain
 
                     c.transform.position = transform.position + new Vector3(i * (float)chunkSizeX / PPU, j * (float)chunkSizeY / PPU, 0);
                     c.transform.SetParent(transform);
-
+                    // if (ChunkCountX != 1 && ChunkCountY != 1)
+                    // {
+                    //     var navMod = c.AddComponent<NavMeshModifier>();
+                    //     navMod.overrideArea = true;
+                    //     navMod.area = 1;
+                    // }
                     Chunks.Add(c.GetComponent<T>());
                 }
             }
