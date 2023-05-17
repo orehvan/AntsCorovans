@@ -9,11 +9,8 @@ public class Enemy : AbstractEnemy
 {
     [SerializeField] private float speed;
     [SerializeField] private float health;
-    [SerializeField] private GameObject path;
-    [SerializeField] private bool isNavmeshPath;
-    [SerializeField] private Transform navmeshTarget;
     [SerializeField] private List<Vector3> waypoints;
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private NavMeshAgent agent;
     private int currentWaypointNum;
     private Vector2 currentWaypoint;
@@ -68,12 +65,8 @@ public class Enemy : AbstractEnemy
                 nextTarget = agent.path.corners[1];
             else
                 nextTarget = navmeshTarget.position;
-            transform.rotation = Quaternion.LookRotation(Vector3.forward, (Vector2)nextTarget - (Vector2)transform.position);
-            // var vectorToTarget = nextTarget - transform.position;
-            // var angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg - 90;
-            // transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            // var angle = Vector3.Angle(nextTarget, Vector2.up);
-            // transform.rotation = Quaternion.Euler(0, 0, angle);
+            spriteRenderer.transform.rotation =
+                Quaternion.LookRotation(Vector3.forward, (Vector2)nextTarget - (Vector2)transform.position);
         }
     }
 
@@ -89,6 +82,11 @@ public class Enemy : AbstractEnemy
         health -= damage;
         if (health <= 0)
             Die();
+    }
+
+    public override void SetTarget(Transform navmeshTransform)
+    {
+        navmeshTarget = navmeshTransform;
     }
 
     private void Die()
