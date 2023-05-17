@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool _isMoving;
     private bool navmeshBuilt;
     private bool diggingMode;
+    private bool firstStartBecauseIDontKnowWhatElseToDo = true;
 
     [SerializeField] protected BasicPaintableLayer primaryLayer;
     [SerializeField] protected BasicPaintableLayer secondaryLayer;
@@ -29,6 +30,8 @@ public class PlayerController : MonoBehaviour
 
     private NavMeshAgent agent;
     [SerializeField] private NavMeshSurface navmesh;
+    
+    public event Action DiggingModeChanged;
 
     private void Awake()
     {
@@ -48,23 +51,30 @@ public class PlayerController : MonoBehaviour
         // destroyCircleSize = 40;
         
         _destroyCircle = Shape.GenerateShapeCircle(destroyCircleSize);
-        
         Debug.Log($"Circle size: {destroyCircleSize}");
+        navmesh.BuildNavMesh();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            DiggingModeChanged.Invoke();
             navmesh.BuildNavMesh();
             diggingMode = !diggingMode;
             agent.enabled = !agent.enabled;
             _targetPosition = transform.position;
-            agent.ResetPath();
+            if (agent.enabled)
+                agent.ResetPath();
         }
 
         if (Input.GetMouseButtonDown(0))
         {
+            if (firstStartBecauseIDontKnowWhatElseToDo)
+            {
+                firstStartBecauseIDontKnowWhatElseToDo = false;
+                navmesh.BuildNavMesh();
+            }
             SetTargetPosition();
             navmeshBuilt = false;
         }
