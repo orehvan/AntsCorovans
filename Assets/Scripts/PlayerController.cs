@@ -5,6 +5,7 @@ using DTerrain;
 using NavMeshPlus.Components;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
@@ -19,10 +20,15 @@ public class PlayerController : MonoBehaviour
     private Vector3 _targetPosition;
     private bool _isMoving;
     private bool navmeshBuilt;
+    private bool diggingMode;
+    private bool destinationSet;
     
     [SerializeField] protected BasicPaintableLayer primaryLayer;
     [SerializeField] protected BasicPaintableLayer secondaryLayer;
-    
+
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+    private NavMeshAgent agent;
     [SerializeField] private NavMeshSurface navmesh;
 
     private void Awake()
@@ -31,12 +37,17 @@ public class PlayerController : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+        agent = gameObject.GetComponent<NavMeshAgent>();
+        agent.updateRotation = false; 
+        agent.updateUpAxis = false;
+        _targetPosition = transform.position;
     }
     
     private void Start()
     {
         // DestroyCircleSize = (int)Math.Ceiling(GetComponent<SpriteRenderer>().bounds.size.x);
         // destroyCircleSize = 40;
+        
         _destroyCircle = Shape.GenerateShapeCircle(destroyCircleSize);
         
         Debug.Log($"Circle size: {destroyCircleSize}");
@@ -44,6 +55,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            diggingMode = !diggingMode;
+            agent.enabled = !agent.enabled;
+            _targetPosition = transform.position;
+            agent.ResetPath();
+            navmesh.BuildNavMesh();
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             SetTargetPosition();
@@ -57,9 +77,28 @@ public class PlayerController : MonoBehaviour
             navmeshBuilt = true;
             return;
         }
-        Move();
-        DestroyTerrain();
+
+        if (!diggingMode)
+        {
+            if (Vector2.Distance(transform.position, _targetPosition) < 0.01f)
+            {
+                _isMoving = false;
+            }
+            else 
+            {
+                agent.SetDestination(_targetPosition);
+            }
+            var nextTarget = agent.path.corners.Length > 1 ? agent.path.corners[1] : _targetPosition;
+            spriteRenderer.transform.rotation =
+                Quaternion.LookRotation(Vector3.forward, (Vector2)nextTarget - (Vector2)transform.position);
+        }
+        else
+        {
+            Move();
+            DestroyTerrain();
+        }
     }
+    
 
     private void Move()
     {
@@ -67,7 +106,7 @@ public class PlayerController : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, _targetPosition, speed * Time.deltaTime);
         Debug.Log($"Mouse pos: {_targetPosition}");
 
-        if (transform.position == _targetPosition) _isMoving = false;
+        if (Vector2.Distance(transform.position, _targetPosition) < 0.01f) _isMoving = false;
     }
 
     private void SetTargetPosition()
