@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,15 @@ public class Enemy : AbstractEnemy
 {
     [SerializeField] private float speed;
     [SerializeField] private float health;
+    [SerializeField] private float damage;
     [SerializeField] private List<Vector3> waypoints;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private BaseBehavior baseObj;
     private NavMeshAgent agent;
     private int currentWaypointNum;
     private Vector2 currentWaypoint;
+    private float attackCounter;
+    private float attackDelay;
     void Start()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -92,5 +97,15 @@ public class Enemy : AbstractEnemy
     private void Die()
     {
         Destroy(gameObject);
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (!other.gameObject == baseObj) return;
+        attackCounter -= Time.deltaTime;
+
+        if (!(attackCounter <= 0)) return;
+        attackCounter = attackDelay;
+        baseObj.TakeDamage(damage);
     }
 }
