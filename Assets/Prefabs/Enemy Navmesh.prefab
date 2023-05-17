@@ -106,7 +106,7 @@ MonoBehaviour:
   navmeshTarget: {fileID: 0}
   speed: 1
   health: 15
-  damage: 0
+  damage: 5
   waypoints:
   - {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 6141488675091076263}

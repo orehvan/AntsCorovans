@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private int enemyQuantity;
     private int enemiesSpawned;
     [SerializeField] private float delayBetweenSpawns;
+    [SerializeField] private BaseBehavior baseObj;
     private float nextSpawnTime;
 
 
@@ -28,6 +29,7 @@ public class Spawner : MonoBehaviour
         }
         var newEnemy = Instantiate(regularEnemy, transform.position, transform.rotation);
         newEnemy.SetTarget(navmeshTarget);
+        newEnemy.SetBaseTarget(baseObj);
         nextSpawnTime = delayBetweenSpawns;
         enemiesSpawned++;
     }

@@ -13,6 +13,7 @@ public class BaseBehavior : MonoBehaviour
     void Start()
     {
         currentHealth = totalHealth;
+        Debug.Log(currentHealth);
     }
 
     // Update is called once per frame
@@ -23,8 +24,10 @@ public class BaseBehavior : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        Debug.Log("Under Attack");
         currentHealth -= damage;
-
-        if (currentHealth <= 0) gameObject.SetActive(false);
+        Debug.Log(currentHealth);
+        if (currentHealth <= 0) 
+            gameObject.SetActive(false);
     }
 }

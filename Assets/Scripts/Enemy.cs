@@ -13,12 +13,11 @@ public class Enemy : AbstractEnemy
     [SerializeField] private float damage;
     [SerializeField] private List<Vector3> waypoints;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private BaseBehavior baseObj;
     private NavMeshAgent agent;
     private int currentWaypointNum;
     private Vector2 currentWaypoint;
-    private float attackCounter;
-    private float attackDelay;
+    private float attackCounter = 0;
+    private float attackDelay = 5f;
     void Start()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -46,11 +45,14 @@ public class Enemy : AbstractEnemy
             currentWaypoint = navmeshTarget.position;
         }
 
-        if (Vector2.Distance(transform.position, currentWaypoint) < 0.01f)
+        if (Vector2.Distance(transform.position, currentWaypoint) < 1f)
         {
             if (isNavmeshPath || waypoints.Count  == currentWaypointNum)
             {
-                // Debug.Log("Attack base or something");
+                attackCounter -= Time.deltaTime;
+                if (!(attackCounter < 0)) return;
+                attackCounter = attackDelay;
+                baseObj.TakeDamage(damage);
                 return;
             }
             currentWaypoint = waypoints[currentWaypointNum];
@@ -98,14 +100,5 @@ public class Enemy : AbstractEnemy
     {
         Destroy(gameObject);
     }
-
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        if (!other.gameObject == baseObj) return;
-        attackCounter -= Time.deltaTime;
-
-        if (!(attackCounter <= 0)) return;
-        attackCounter = attackDelay;
-        baseObj.TakeDamage(damage);
-    }
+    
 }
