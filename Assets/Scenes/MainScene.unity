@@ -201,7 +201,7 @@ MonoBehaviour:
   <ChunkCountX>k__BackingField: 64
   <ChunkCountY>k__BackingField: 64
   chunkTemplate: {fileID: 5194434684234072523, guid: 847a2e425730df3409385592b669f10a, type: 3}
-  <OriginalTexture>k__BackingField: {fileID: 2800000, guid: 4cc1279a646d5044da004a8a02595e57, type: 3}
+  <OriginalTexture>k__BackingField: {fileID: 2800000, guid: ae7815e5f7137004fa578cb48eff6061, type: 3}
   <PPU>k__BackingField: 32
   filterMode: 0
   <SortingLayerID>k__BackingField: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
   <ChunkCountX>k__BackingField: 1
   <ChunkCountY>k__BackingField: 1
   chunkTemplate: {fileID: 5194434684234072523, guid: 37c73454f27eef44b862eb12bd4ee2a3, type: 3}
-  <OriginalTexture>k__BackingField: {fileID: 2800000, guid: 4cc1279a646d5044da004a8a02595e57, type: 3}
+  <OriginalTexture>k__BackingField: {fileID: 2800000, guid: ae7815e5f7137004fa578cb48eff6061, type: 3}
   <PPU>k__BackingField: 32
   filterMode: 0
   <SortingLayerID>k__BackingField: 0
