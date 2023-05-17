@@ -21,8 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool _isMoving;
     private bool navmeshBuilt;
     private bool diggingMode;
-    private bool destinationSet;
-    
+
     [SerializeField] protected BasicPaintableLayer primaryLayer;
     [SerializeField] protected BasicPaintableLayer secondaryLayer;
 
@@ -57,11 +56,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            navmesh.BuildNavMesh();
             diggingMode = !diggingMode;
             agent.enabled = !agent.enabled;
             _targetPosition = transform.position;
             agent.ResetPath();
-            navmesh.BuildNavMesh();
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -81,13 +80,9 @@ public class PlayerController : MonoBehaviour
         if (!diggingMode)
         {
             if (Vector2.Distance(transform.position, _targetPosition) < 0.01f)
-            {
                 _isMoving = false;
-            }
-            else 
-            {
+            else
                 agent.SetDestination(_targetPosition);
-            }
             var nextTarget = agent.path.corners.Length > 1 ? agent.path.corners[1] : _targetPosition;
             spriteRenderer.transform.rotation =
                 Quaternion.LookRotation(Vector3.forward, (Vector2)nextTarget - (Vector2)transform.position);
@@ -102,7 +97,8 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, _targetPosition - transform.position);
+        spriteRenderer.transform.rotation =
+            Quaternion.LookRotation(Vector3.forward, (Vector2)_targetPosition - (Vector2)transform.position);
         transform.position = Vector3.MoveTowards(transform.position, _targetPosition, speed * Time.deltaTime);
         Debug.Log($"Mouse pos: {_targetPosition}");
 
