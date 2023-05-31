@@ -6,6 +6,7 @@ using UnityEngine;
 public class SpawnTrigger : MonoBehaviour
 {
     public GameObject[] spawners;
+    [SerializeField] private CorovanController corovan;
 
     private bool spawnStarted;
     // Start is called before the first frame update
@@ -24,7 +25,7 @@ public class SpawnTrigger : MonoBehaviour
     {
         if (spawnStarted) return;
         spawnStarted = true;
-        
+        corovan.gameObject.SetActive(true);
         Debug.Log("Spawn started");
         
         foreach (var spawner in spawners)
