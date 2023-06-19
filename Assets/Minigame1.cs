@@ -12,13 +12,23 @@ public class Minigame1 : MonoBehaviour
     private int correctInputs;
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private GameObject panel;
-
     [SerializeField] private CorovanMinigame game;
+    [SerializeField] private List<ColorButton> buttons;
     void Start()
+    {
+        // foreach (var color in colors)
+        //     colorsInserted.Add(color, false);
+        GenerateStart();
+    }
+
+    public void GenerateStart()
     {
         PlayerController.Instance.inputDisabled = true;
         foreach (var color in colors)
-            colorsInserted.Add(color, false);
+            colorsInserted[color] = false;
+        foreach (var button in buttons)
+            button.Reset();
+        
         correctInputs = 0;
         GenerateNextColor();
     }

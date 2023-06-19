@@ -21,6 +21,11 @@ public class Minigame2 : MonoBehaviour
     
     void Start()
     {
+        GenerateStart();
+    }
+
+    public void GenerateStart()
+    {
         PlayerController.Instance.inputDisabled = true;
         correctInputs = 0;
         GenerateMinigame();
@@ -32,6 +37,7 @@ public class Minigame2 : MonoBehaviour
         foreach (Transform wireGO in wireStart.transform)
         {
             var wire = wireGO.GetComponent<Wire>();
+            wire.ResetWire();
             var color = colors[Random.Range(0, colors.Count)];
             wire.color = color;
             wire.ColorWire();
@@ -41,6 +47,7 @@ public class Minigame2 : MonoBehaviour
         foreach (Transform wireGO in wireEnd.transform)
         {
             var wire = wireGO.GetComponent<Wire>();
+            wire.ResetWire();
             var index = Random.Range(0, generatedColors.Count);
             var color = generatedColors[index];
             generatedColors.RemoveAt(index);
@@ -64,9 +71,9 @@ public class Minigame2 : MonoBehaviour
     
     private void Complete()
     {
-        game.complete = true;
         gameObject.SetActive(false);
         panel.SetActive(false);
+        game.complete = true;
         PlayerController.Instance.inputDisabled = false;
     }
 }

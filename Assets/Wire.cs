@@ -16,13 +16,20 @@ public class Wire : MonoBehaviour
     private Transform fixedPos;
     [SerializeField] private Canvas canvas;
 
-    private void Start()
+    private void Awake()
     {
         image = GetComponent<Image>();
         lr = GetComponent<LineRenderer>();
         button = GetComponent<Button>();
         button.onClick.AddListener(Input);
         // canvas = GetComponent<Canvas>();
+    }
+
+    public void ResetWire()
+    {
+        done = false;
+        fixedPos = null;
+        lr.enabled = false;
     }
 
     private void Update()

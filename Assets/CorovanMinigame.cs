@@ -17,15 +17,16 @@ public class CorovanMinigame : MonoBehaviour
         complete = false;
         panel.SetActive(true);
         var rand = Random.Range(0, 2);
-        game1.gameObject.SetActive(true);
-        // switch (rand)
-        // {
-        //     case 0:
-        //         game1.gameObject.SetActive(true);
-        //         break;
-        //     case 1:
-        //         game2.gameObject.SetActive(true);
-        //         break;
-        // }
+        switch (rand)
+        {
+            case 0:
+                game1.gameObject.SetActive(true);
+                game1.GenerateStart();
+                break;
+            case 1:
+                game2.gameObject.SetActive(true);
+                game2.GenerateStart();
+                break;
+        }
     }
 }

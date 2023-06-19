@@ -24,6 +24,7 @@ public class CorovanController : MonoBehaviour
 
     private bool corovanThingsDone = true;
     [SerializeField] private bool goingHome;
+    private bool startedWorking;
     private void Awake()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
@@ -46,7 +47,8 @@ public class CorovanController : MonoBehaviour
         {
             if (!goingHome)
             {
-                StartCoroutine(CorovanThings());
+                if (!startedWorking)
+                    StartCoroutine(CorovanThings());
                 //DoCorovanThings
                 // goingHome = true;
                 // navmeshTarget = baseObj.transform;
@@ -67,12 +69,17 @@ public class CorovanController : MonoBehaviour
 
     private IEnumerator CorovanThings()
     {
+        startedWorking = true;
         yield return new WaitForSeconds(5f);
         corovanMinigame.StartGame();
         yield return new WaitUntil(() => corovanMinigame.complete);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5);
         corovanMinigame.StartGame();
         yield return new WaitUntil(() => corovanMinigame.complete);
+        yield return new WaitForSeconds(5);
+        corovanMinigame.StartGame();
+        yield return new WaitUntil(() => corovanMinigame.complete);
+        yield return new WaitForSeconds(5);
         goingHome = true;
         navmeshTarget = baseObj.transform;
         agent.SetDestination(navmeshTarget.position);
