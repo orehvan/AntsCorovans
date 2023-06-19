@@ -13,17 +13,15 @@ public class Enemy : AbstractEnemy
     [SerializeField] private float damage;
     [SerializeField] private List<Vector3> waypoints;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    private NavMeshAgent agent;
     private int currentWaypointNum;
     private Vector2 currentWaypoint;
     private float attackCounter = 0;
     private float attackDelay = 5f;
     void Start()
-    {
+    { 
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         if (isNavmeshPath)
         {
-            agent = gameObject.GetComponent<NavMeshAgent>();
             agent.updateRotation = false; 
             agent.updateUpAxis = false;
             agent.SetDestination(navmeshTarget.position);
