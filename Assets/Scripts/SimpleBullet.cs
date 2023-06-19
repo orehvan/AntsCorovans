@@ -8,7 +8,7 @@ public class SimpleBullet : MonoBehaviour
 {
     [SerializeField] private float flySpeed = 10f;
     [SerializeField] private float maxFlyDistance = 10f;
-    private float damage;
+    [SerializeField] private float damage = 5f;
     private Vector3 startPos;
     private Vector2 direction;
 
@@ -36,10 +36,5 @@ public class SimpleBullet : MonoBehaviour
         if (enemy == null) return;
         enemy.GetDamage(damage);
         Destroy(gameObject);
-    }
-
-    public void SetDamage(float damage)
-    {
-        this.damage = damage;
     }
 }
