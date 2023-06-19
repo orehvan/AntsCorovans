@@ -17,12 +17,13 @@ public class CorovanController : MonoBehaviour
     [SerializeField] private Transform navmeshTarget;
     [SerializeField] private BaseBehavior baseObj;
 
+    private CorovanMinigame corovanMinigame;
+
     private NavMeshAgent agent;
     [SerializeField] private NavMeshSurface navmesh;
 
     private bool corovanThingsDone = true;
-    private bool goingHome;
-    // Start is called before the first frame update
+    [SerializeField] private bool goingHome;
     private void Awake()
     {
         agent = gameObject.GetComponent<NavMeshAgent>();
@@ -35,6 +36,8 @@ public class CorovanController : MonoBehaviour
     {
         _destroyCircle = Shape.GenerateShapeCircle(destroyCircleSize);
         navmesh.BuildNavMesh();
+        corovanMinigame = FindObjectOfType<CorovanMinigame>();
+
     }
     
     void Update()
@@ -43,10 +46,11 @@ public class CorovanController : MonoBehaviour
         {
             if (!goingHome)
             {
+                StartCoroutine(CorovanThings());
                 //DoCorovanThings
-                goingHome = true;
-                navmeshTarget = baseObj.transform;
-                agent.SetDestination(navmeshTarget.position);
+                // goingHome = true;
+                // navmeshTarget = baseObj.transform;
+                // agent.SetDestination(navmeshTarget.position);
             }
             else
             {
@@ -59,6 +63,19 @@ public class CorovanController : MonoBehaviour
             DestroyTerrain();
         }
         RotateSprite();
+    }
+
+    private IEnumerator CorovanThings()
+    {
+        yield return new WaitForSeconds(5f);
+        corovanMinigame.StartGame();
+        yield return new WaitUntil(() => corovanMinigame.complete);
+        yield return new WaitForSeconds(5f);
+        corovanMinigame.StartGame();
+        yield return new WaitUntil(() => corovanMinigame.complete);
+        goingHome = true;
+        navmeshTarget = baseObj.transform;
+        agent.SetDestination(navmeshTarget.position);
     }
 
     private void RotateSprite()
