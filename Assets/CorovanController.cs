@@ -22,23 +22,39 @@ public class CorovanController : MonoBehaviour
 
     private bool corovanThingsDone = true;
     private bool goingHome;
+    private bool ready;
     // Start is called before the first frame update
     private void Awake()
     {
+        _destroyCircle = Shape.GenerateShapeCircle(destroyCircleSize);
+        navmesh?.BuildNavMesh();
         agent = gameObject.GetComponent<NavMeshAgent>();
         agent.updateRotation = false; 
         agent.updateUpAxis = false;
-        agent.SetDestination(navmeshTarget.position);
     }
 
     private void Start()
     {
-        _destroyCircle = Shape.GenerateShapeCircle(destroyCircleSize);
+        if (navmeshTarget is not null)
+            agent.SetDestination(navmeshTarget.position);
+    }
+
+    public void Setup(BasicPaintableLayer primary, BasicPaintableLayer secondary, Transform target, BaseBehavior baseO, NavMeshSurface navmesh)
+    {
+        primaryLayer = primary;
+        secondaryLayer = secondary;
+        navmeshTarget = target;
+        this.navmesh = navmesh;
         navmesh.BuildNavMesh();
+        agent.SetDestination(navmeshTarget.position);
+        baseObj = baseO;
+        ready = true;
     }
     
     void Update()
     {
+        if (!ready)
+            return;
         if (Vector2.Distance(transform.position, navmeshTarget.position) < 2f)
         {
             if (!goingHome)

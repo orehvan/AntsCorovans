@@ -711,11 +711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e88e27f975da049ba3280276b7ec64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseDelta: 10
-  moveSpeed: 15
-  zoomSpeed: 25
-  minZoomDistance: 10
-  maxZoomDistance: 50
+  playerTransform: {fileID: 757513466}
 --- !u!1001 &631603221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2200,7 +2196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &2079671639
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2281,6 +2277,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   corovan: {fileID: 1042714030}
+  corovanPrefab: {fileID: 6199195229260617985, guid: 4d54fa30a403d6d41958c8e521011791, type: 3}
+  spawnPoint: {fileID: 2056936662}
+  collidable: {fileID: 57138026}
+  visible: {fileID: 257477223}
+  baseObj: {fileID: 2056936663}
+  navmeshRoot: {fileID: 1437366738}
 --- !u!58 &2079671642
 CircleCollider2D:
   m_ObjectHideFlags: 0
