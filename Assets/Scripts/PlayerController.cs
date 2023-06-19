@@ -11,6 +11,7 @@ using UnityEngine.Serialization;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get; private set; }
+    public bool inputDisabled = false;
     
     public float speed; 
     public int destroyCircleSize;
@@ -57,6 +58,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (inputDisabled)
+            return;
         if (Input.GetKeyDown(KeyCode.Q))
         {
             DiggingModeChanged.Invoke();
@@ -103,6 +106,7 @@ public class PlayerController : MonoBehaviour
             DestroyTerrain();
         }
     }
+    
     
 
     private void Move()

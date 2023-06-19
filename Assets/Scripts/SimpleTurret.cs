@@ -56,8 +56,8 @@ public class SimpleTurret : AbstractTurret
         }
         if (currentTarget == null)
             return;
-        var newBullet = Instantiate(bullet, bulletSpawnPos.transform.position, transform.rotation);
-        newBullet.GetComponent<SimpleBullet>().SetDamage(damage);
+        Instantiate(bullet, bulletSpawnPos.transform.position, transform.rotation);
+        // newBullet.GetComponent<SimpleBullet>().SetDamage(damage);
        nextAttackTime = delayBetweenAttacks;
     }
     private void OnTriggerEnter2D(Collider2D other)

@@ -17,13 +17,17 @@ public class CorovanController : MonoBehaviour
     [SerializeField] private Transform navmeshTarget;
     [SerializeField] private BaseBehavior baseObj;
 
+    private CorovanMinigame corovanMinigame;
+
     private NavMeshAgent agent;
     [SerializeField] private NavMeshSurface navmesh;
 
     private bool corovanThingsDone = true;
-    private bool goingHome;
     private bool ready;
     // Start is called before the first frame update
+    [SerializeField] private bool goingHome;
+    private bool startedWorking;
+
     private void Awake()
     {
         _destroyCircle = Shape.GenerateShapeCircle(destroyCircleSize);
@@ -49,6 +53,9 @@ public class CorovanController : MonoBehaviour
         agent.SetDestination(navmeshTarget.position);
         baseObj = baseO;
         ready = true;
+        corovanMinigame = FindObjectOfType<CorovanMinigame>();
+
+
     }
     
     void Update()
@@ -59,10 +66,12 @@ public class CorovanController : MonoBehaviour
         {
             if (!goingHome)
             {
+                if (!startedWorking)
+                    StartCoroutine(CorovanThings());
                 //DoCorovanThings
-                goingHome = true;
-                navmeshTarget = baseObj.transform;
-                agent.SetDestination(navmeshTarget.position);
+                // goingHome = true;
+                // navmeshTarget = baseObj.transform;
+                // agent.SetDestination(navmeshTarget.position);
             }
             else
             {
@@ -75,6 +84,24 @@ public class CorovanController : MonoBehaviour
             DestroyTerrain();
         }
         RotateSprite();
+    }
+
+    private IEnumerator CorovanThings()
+    {
+        startedWorking = true;
+        yield return new WaitForSeconds(5f);
+        corovanMinigame.StartGame();
+        yield return new WaitUntil(() => corovanMinigame.complete);
+        yield return new WaitForSeconds(5);
+        corovanMinigame.StartGame();
+        yield return new WaitUntil(() => corovanMinigame.complete);
+        yield return new WaitForSeconds(5);
+        corovanMinigame.StartGame();
+        yield return new WaitUntil(() => corovanMinigame.complete);
+        yield return new WaitForSeconds(5);
+        goingHome = true;
+        navmeshTarget = baseObj.transform;
+        agent.SetDestination(navmeshTarget.position);
     }
 
     private void RotateSprite()
