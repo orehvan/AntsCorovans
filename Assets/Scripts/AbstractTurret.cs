@@ -10,6 +10,7 @@ namespace DefaultNamespace
         [SerializeField] private int poisonPrice;
         [SerializeField] private int metalPrice;
         public Sprite turretImage;
+        public GameObject turretBaseImage;
         
         public BoxCollider2D turretCollider;
 
