@@ -10,6 +10,7 @@ public class CorovanController : MonoBehaviour
     public float speed; 
     public int destroyCircleSize;
     private Shape _destroyCircle;
+    [SerializeField] private float hp = 100;
 
     [SerializeField] private BasicPaintableLayer primaryLayer;
     [SerializeField] private BasicPaintableLayer secondaryLayer;
@@ -100,6 +101,7 @@ public class CorovanController : MonoBehaviour
         yield return new WaitUntil(() => corovanMinigame.complete);
         yield return new WaitForSeconds(5);
         goingHome = true;
+        Destroy(navmeshTarget.gameObject);
         navmeshTarget = baseObj.transform;
         agent.SetDestination(navmeshTarget.position);
     }
