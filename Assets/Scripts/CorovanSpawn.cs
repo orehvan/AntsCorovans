@@ -14,10 +14,12 @@ public class CorovanSpawn : MonoBehaviour
     [SerializeField] private BasicPaintableLayer visible;
     [SerializeField] private BaseBehavior baseObj;
     [SerializeField] private NavMeshSurface navmeshRoot;
+    [SerializeField] private List<Spawner> spawners;
     private bool spawned;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (spawned) return;
+        if (!other.GetComponent<PlayerController>()) return;
         spawned = true;
         var position = spawnPoint.position;
         var corova = Instantiate(corovanPrefab,
@@ -26,5 +28,22 @@ public class CorovanSpawn : MonoBehaviour
         corova.GetComponent<CorovanController>().Setup(collidable, visible, gameObject.transform, baseObj, navmeshRoot);
 
         //corovan.gameObject.SetActive(true);
+    }
+
+    public void StartLocalDefense()
+    {
+        foreach (var spawner in spawners)
+        {
+            spawner.gameObject.SetActive(true);
+            spawner.isLocalDefense = true;
+        }
+    }
+
+    public void EndLocalDefense()
+    {
+        foreach (var spawner in spawners)
+        {
+            spawner.gameObject.SetActive(false);
+        }
     }
 }

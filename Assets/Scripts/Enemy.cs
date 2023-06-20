@@ -37,20 +37,28 @@ public class Enemy : AbstractEnemy
     
     void Update()
     {
+        if (navmeshTarget is null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         if (isNavmeshPath && navmeshTarget.hasChanged)
         {
             agent.SetDestination(navmeshTarget.position);
             currentWaypoint = navmeshTarget.position;
         }
 
-        if (Vector2.Distance(transform.position, currentWaypoint) < 1f)
+        if (Vector2.Distance(transform.position, currentWaypoint) < 2f)
         {
             if (isNavmeshPath || waypoints.Count  == currentWaypointNum)
             {
                 attackCounter -= Time.deltaTime;
                 if (!(attackCounter < 0)) return;
                 attackCounter = attackDelay;
-                baseObj.TakeDamage(damage);
+                if (attackingBase)
+                    baseObj.TakeDamage(damage);
+                else
+                    corovan.TakeDamage(damage);
                 return;
             }
             currentWaypoint = waypoints[currentWaypointNum];

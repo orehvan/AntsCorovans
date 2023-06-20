@@ -124,3 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbc35556401f3d446aa56a42b6f4dd15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flySpeed: 10
+  maxFlyDistance: 10
+  damage: 4
+  poisonDamage: 3
+  poisonTicks: 3
+  slownessCoef: 0.8

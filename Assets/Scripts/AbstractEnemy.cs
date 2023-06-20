@@ -9,6 +9,8 @@ namespace DefaultNamespace
         [SerializeField] protected bool isNavmeshPath;
         [SerializeField] protected Transform navmeshTarget;
         [SerializeField] protected BaseBehavior baseObj;
+        [SerializeField] protected CorovanController corovan;
+        public bool attackingBase;
         protected NavMeshAgent agent;
         
         protected void Awake()
@@ -26,6 +28,11 @@ namespace DefaultNamespace
         public void SetBaseTarget(BaseBehavior baseObj)
         {
             this.baseObj = baseObj;
+        }
+
+        public void SetCorovanTarget(CorovanController corovan)
+        {
+            this.corovan = corovan;
         }
 
         public void SetSlowness(float slowness)

@@ -59,6 +59,11 @@ public class PoisonBullet : MonoBehaviour
             enemy.SetSlowness(slownessCoef);
             yield return new WaitForSeconds(1f);
         }
+        if (enemy == null)
+        {
+            Destroy(gameObject);
+            yield break;
+        }
         enemy.SetSlowness(1/slownessCoef);
         Destroy(gameObject);
     }

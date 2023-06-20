@@ -137,7 +137,7 @@ MonoBehaviour:
   turretImage: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   turretCollider: {fileID: 7389271878131551810}
   damage: 5
-  delayBetweenAttacks: 5
+  delayBetweenAttacks: 2
   range: 10
   bulletSpawnPos: {fileID: 1498504056986208684}
   bullet: {fileID: 7306546121079447749, guid: cac34add40501134f8630e89e56494e6, type: 3}

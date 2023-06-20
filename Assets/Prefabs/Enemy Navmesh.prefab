@@ -104,13 +104,15 @@ MonoBehaviour:
   path: {fileID: 0}
   isNavmeshPath: 1
   navmeshTarget: {fileID: 0}
+  baseObj: {fileID: 6663934345449921316, guid: cf3f38082d4fe6e4e9760fee3702294e, type: 3}
+  corovan: {fileID: 0}
+  attackingBase: 0
   speed: 1
-  health: 15
+  health: 10
   damage: 5
   waypoints:
   - {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 6141488675091076263}
-  baseObj: {fileID: 6663934345449921316, guid: cf3f38082d4fe6e4e9760fee3702294e, type: 3}
 --- !u!61 &1821170363997017023
 BoxCollider2D:
   m_ObjectHideFlags: 0

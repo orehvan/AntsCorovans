@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private bool navmeshBuilt;
     private bool diggingMode;
     private bool firstStartBecauseIDontKnowWhatElseToDo = true;
+    private int deliveries;
 
     [SerializeField] protected BasicPaintableLayer primaryLayer;
     [SerializeField] protected BasicPaintableLayer secondaryLayer;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     private NavMeshAgent agent;
     [SerializeField] private NavMeshSurface navmesh;
+    [SerializeField] private GameObject spawners;
     
     public event Action DiggingModeChanged;
 
@@ -111,6 +113,7 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
+        // LastStand(); //TODELETE
         spriteRenderer.transform.rotation =
             Quaternion.LookRotation(Vector3.forward, (Vector2)_targetPosition - (Vector2)transform.position);
         transform.position = Vector3.MoveTowards(transform.position, _targetPosition, speed * Time.deltaTime);
@@ -147,5 +150,23 @@ public class PlayerController : MonoBehaviour
             PaintingMode = PaintingMode.REPLACE_COLOR,
             DestructionMode = DestructionMode.DESTROY
         });
+    }
+
+    public void Delivery()
+    {
+        deliveries++;
+        if (deliveries == 2)
+            LastStand();
+    }
+
+    private void LastStand()
+    {
+        var cam = FindObjectOfType<Camera>();
+        cam.orthographicSize = 20;
+        foreach (Transform spawner in spawners.transform)
+        {
+            spawner.gameObject.SetActive(true);
+            spawner.GetComponent<Spawner>().isLocalDefense = false;
+        }
     }
 }

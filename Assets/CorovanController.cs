@@ -11,12 +11,14 @@ public class CorovanController : MonoBehaviour
     public int destroyCircleSize;
     private Shape _destroyCircle;
     [SerializeField] private float hp = 100;
+    public float currentHealth;
 
     [SerializeField] private BasicPaintableLayer primaryLayer;
     [SerializeField] private BasicPaintableLayer secondaryLayer;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Transform navmeshTarget;
     [SerializeField] private BaseBehavior baseObj;
+    private Camera cam;
 
     private CorovanMinigame corovanMinigame;
 
@@ -40,6 +42,7 @@ public class CorovanController : MonoBehaviour
 
     private void Start()
     {
+        currentHealth = hp;
         if (navmeshTarget is not null)
             agent.SetDestination(navmeshTarget.position);
     }
@@ -55,8 +58,8 @@ public class CorovanController : MonoBehaviour
         baseObj = baseO;
         ready = true;
         corovanMinigame = FindObjectOfType<CorovanMinigame>();
-
-
+        cam = FindObjectOfType<Camera>();
+        cam.orthographicSize = 10;
     }
     
     void Update()
@@ -89,6 +92,7 @@ public class CorovanController : MonoBehaviour
 
     private IEnumerator CorovanThings()
     {
+        navmeshTarget.GetComponent<CorovanSpawn>().StartLocalDefense();
         startedWorking = true;
         yield return new WaitForSeconds(5f);
         corovanMinigame.StartGame();
@@ -99,8 +103,10 @@ public class CorovanController : MonoBehaviour
         yield return new WaitForSeconds(5);
         corovanMinigame.StartGame();
         yield return new WaitUntil(() => corovanMinigame.complete);
+        navmeshTarget.GetComponent<CorovanSpawn>().EndLocalDefense();
         yield return new WaitForSeconds(5);
         goingHome = true;
+        cam.orthographicSize = 8;
         Destroy(navmeshTarget.gameObject);
         navmeshTarget = baseObj.transform;
         agent.SetDestination(navmeshTarget.position);
@@ -138,8 +144,17 @@ public class CorovanController : MonoBehaviour
 
     private void Reward()
     {
+        PlayerController.Instance.Delivery();
         PlayerController.Instance.playerResources.FireResource += 50;
         PlayerController.Instance.playerResources.PoisonResource += 50;
         PlayerController.Instance.playerResources.MetalResource += 50;
+    }
+    
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+        Debug.Log(currentHealth);
+        if (currentHealth <= 0) 
+            gameObject.SetActive(false);
     }
 }
