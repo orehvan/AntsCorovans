@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 76395b8dd95263a46a5b148579d8e537, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cf3ef4a0d0a681a4d89cf8cf9fb33709, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -193,10 +193,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   destroyCircleSize: 125
+  hp: 100
+  currentHealth: 0
   primaryLayer: {fileID: 0}
   secondaryLayer: {fileID: 0}
   spriteRenderer: {fileID: 6199195228734805549}
   navmeshTarget: {fileID: 0}
   baseObj: {fileID: 0}
+  secondForm: {fileID: 21300000, guid: 22ad04d050bbf4b4189700e3ee876544, type: 3}
   navmesh: {fileID: 0}
   goingHome: 0

@@ -18,6 +18,7 @@ public class CorovanController : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Transform navmeshTarget;
     [SerializeField] private BaseBehavior baseObj;
+    [SerializeField] private Sprite secondForm;
     private Camera cam;
 
     private CorovanMinigame corovanMinigame;
@@ -105,6 +106,10 @@ public class CorovanController : MonoBehaviour
         yield return new WaitUntil(() => corovanMinigame.complete);
         navmeshTarget.GetComponent<CorovanSpawn>().EndLocalDefense();
         yield return new WaitForSeconds(5);
+        foreach (Transform child in transform)
+        {
+            child.GetComponent<SpriteRenderer>().sprite = secondForm;
+        }
         goingHome = true;
         cam.orthographicSize = 8;
         Destroy(navmeshTarget.gameObject);
